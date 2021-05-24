@@ -24,6 +24,7 @@ class CommentsTableSeeder extends Seeder
                 $newComment = new Comment();
                 $newComment->post_id = $post->id;
                 $newComment->name = $faker->name();
+                $newComment->date = $faker->date();
                 $newComment->content = $faker->text();
                 $newComment->save();
             }
