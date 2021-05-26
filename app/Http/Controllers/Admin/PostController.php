@@ -110,6 +110,7 @@ class PostController extends Controller
 
         $data['slug'] = Str::slug($data['title'], '-');
         
+        //aggiorno i post
         $post->update($data);
 
         // aggiorno i tags
