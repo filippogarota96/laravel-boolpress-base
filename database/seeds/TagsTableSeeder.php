@@ -23,7 +23,7 @@ class TagsTableSeeder extends Seeder
             'laravel',
             'sass'
         ];
-
+        //creo i tags seeds
         foreach ($tags as $tag) {
             $newTag = new Tag();
             $newTag->name = $tag;
