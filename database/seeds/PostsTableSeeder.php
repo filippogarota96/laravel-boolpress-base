@@ -17,7 +17,7 @@ class PostsTableSeeder extends Seeder
         for($i = 0; $i < 10; $i++){
             $newPost = new Post();
             $newPost->title = $faker->sentence();
-            $newPost->date = $faker->date('Y_m_d');
+            $newPost->date = $faker->date();
             $newPost->content = $faker->text();
             $newPost->image = $faker->imageUrl(640, 480, 'animals', true);
             $newPost->slug = Str::slug($newPost->title, '-');

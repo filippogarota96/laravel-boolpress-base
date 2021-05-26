@@ -1,11 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use App\Post;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
+    protected $validation = [
+        'date' => 'required|date',
+        'content' => 'required|string',
+        'image' => 'nullable|url'
+    ];
     /**
      * Display a listing of the resource.
      *
@@ -23,7 +31,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.posts.create');
     }
 
     /**
@@ -34,7 +42,18 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validation = $this->validation;
+        $validation['title'] = 'required|string|max:255|unique:posts';
+
+        $request->validate($this->validation);
+
+        $data = $request->all();
+        //controllo checkbox
+        $data['published'] = !isset($data['published']) ? false : true;
+        //setto lo slug
+        $data['slug'] = Str::slug($data['title'], '-');
+
+        $newPost = Post::create($data);   
     }
 
     /**
