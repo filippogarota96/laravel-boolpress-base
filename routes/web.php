@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlogController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,6 +19,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'BlogController@index')->name('guest.posts.index');
 Route::get('posts/{slug}', 'BlogController@show')->name('guest.posts.show');
+
+//
+Route::post('posts/{post}/add-comment', 'BlogController@addComment')->name('guests.post.add-comment');
 
 
 Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function () {

@@ -16,13 +16,14 @@
 		<ul>
 			@foreach ($post->comments as $comment)
 				<li>
-					<h5>{{$comment->name ? $comment->name : 'Leone da tastiera'}}</h5>
+					<h5>{{$comment->name ? $comment->name : 'Anonimo'}}</h5>
 					<p>{{$comment->content}}</p>
 				</li>
 			@endforeach
 		</ul>
 		@endif
 		<h3>Aggiungi Commento</h3>
+			{{-- form per l'aggiunta di un nuovo commento --}}
 		<form action="{{route('guest.posts.add-comment', ['post' => $post->id])}}" method="post">
 			@csrf
 			@method('POST')
