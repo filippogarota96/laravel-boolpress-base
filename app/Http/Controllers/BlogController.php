@@ -27,7 +27,7 @@ class BlogController extends Controller
         if ($post == null) {
             abort(404);
         }
-        // restituisco la pagina del post
+     
         return view('guest.show', compact('post', 'tags'));
     }
 
@@ -42,7 +42,7 @@ class BlogController extends Controller
 
         $posts = $tag->posts()->where('published', 1)->get();
 
-        // restituisco la pagina home
+      
         return view('guest.index', compact('posts', 'tags'));
     }
 
@@ -56,8 +56,8 @@ class BlogController extends Controller
         $newComment = new Comment();
         $newComment->name = $request->name;
         $newComment->content = $request->content;
+        $newComment->date = date('Y-m-d');
         $newComment->post_id = $post->id;
-
         $newComment->save();
 
         return back();
