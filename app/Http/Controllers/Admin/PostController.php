@@ -7,13 +7,15 @@ use App\Post;
 use App\Tag;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
+
 
 class PostController extends Controller
 {
     protected $validation = [
         'date' => 'required|date',
         'content' => 'required|string',
-        'image' => 'nullable|url'
+        'image' => 'nullable|mimes:jpg, png, gif, svg,|max: 2048'
     ];
     /**
      * Display a listing of the resource.
@@ -44,10 +46,10 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
+        
         $validation = $this->validation;
         $validation['title'] = 'required|string|max:255|unique:posts';
-
         $request->validate($validation);
 
         $data = $request->all();
@@ -55,6 +57,11 @@ class PostController extends Controller
         $data['published'] = !isset($data['published']) ? false : true;
         //setto lo slug
         $data['slug'] = Str::slug($data['title'], '-');
+        
+        if(isset($data['image']))
+        {
+            $data['image'] = Storage::disk('public')->put('images', $data['image']);
+        }
 
         $newPost = Post::create($data);
 
@@ -62,6 +69,7 @@ class PostController extends Controller
         if(isset($data['tags'])){
             $newPost->tags()->attach($data['tags']);
         }
+
         
  
         // invio tutto alla view index
