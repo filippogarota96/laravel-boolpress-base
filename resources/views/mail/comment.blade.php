@@ -4,4 +4,4 @@
   il post commentato è: {{$post->title}}
 </h4>
 
-<a href="{{route('admin.post.show', ['post' => $post->id])}}"></a>
+<a href="{{route('admin.posts.show', ['post' => $post->id])}}"></a>

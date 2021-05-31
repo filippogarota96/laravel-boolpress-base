@@ -19,7 +19,9 @@ class PostsTableSeeder extends Seeder
             $newPost->title = $faker->sentence();
             $newPost->date = $faker->date();
             $newPost->content = $faker->text();
-            $newPost->image = 'images/'. $faker->image('public/storage/images', 400, 300, null, false);
+            $newImage = $faker->image(storage_path('/'), 400, 300);
+            \Log::info($newImage);
+            $newPost->image = $faker->image('public/storage/images', 400, 300, null, false);
             $newPost->slug = Str::slug($newPost->title, '-');
             $newPost->published = rand(0, 1);
             $newPost->save();
