@@ -33,7 +33,8 @@
 	</div>
 	<div class="form-group">
 		<label for="image">Immagine</label>
-		<input type="text" class="form-control" id="image" name="image" placeholder="Image" value="{{$post->image}}">
+		<img src="{{asset('storage/' . $post->image)}}" width="100">
+		<input type="file" class="form-control" id="image" name="image" placeholder="Image" value="{{$post->image}}">
 	</div>
 	<div class="form-check form-check-inline">
 		<input class="form-check-input" type="checkbox" id="published" name="published" {{$post->published ? 'checked' : ''}}>

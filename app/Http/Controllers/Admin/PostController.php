@@ -119,6 +119,11 @@ class PostController extends Controller
         $data['published'] = !isset($data['published']) ? false : true;
 
         $data['slug'] = Str::slug($data['title'], '-');
+
+        if (isset($data['image'])) {
+            $data['image'] = Storage::disk('public')->put('images', $data['image']);
+        }
+
         
         //aggiorno i post
         $post->update($data);
